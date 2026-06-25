@@ -43,7 +43,7 @@ def depurar_jwt(token):
         return {"Erro": f"Falha crítica ao decodificar: {str(e)}"}
 
 def limpar_tela():
-    """Limpa o terminal para a próxima consulta."""
+    """Limpa o terminal."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def main():
@@ -51,13 +51,15 @@ def main():
     if os.name == 'nt':
         os.system('color 0a')
         
-    while True:
-        limpar_tela()
-        print("\n" + "="*45)
-        print("         SYSTEM DEPURADOR JWT - MATRIX        ")
-        print("="*45)
+    # Limpa o terminal uma única vez na inicialização para começar o histórico do zero
+    limpar_tela()
+    
+    print("\n" + "="*45)
+    print("         SYSTEM DEPURADOR JWT - Ycreatoor        ")
+    print("="*45)
         
-        token = input("Cole a sequência do token JWT e aperte Enter:\n> ")
+    while True:
+        token = input("\nCole a sequência do token JWT e aperte Enter:\n> ")
         
         if token.strip():
             resultado = depurar_jwt(token)
@@ -70,12 +72,18 @@ def main():
         else:
             print("❌ Nenhuma sequência detectada.")
 
-        # Pergunta se quer continuar
-        continuar = input("\nDeseja decodificar outra sequência? (S/N): ").strip().upper()
+        # Pergunta se quer continuar (sem limpar a tela atual)
+        continuar = input("Deseja decodificar outra sequência? (S/N): ").strip().upper()
         if continuar != 'S':
-            break  # Quebra o loop principal
+            break  # Quebra o loop principal e vai para a finalização
+            
+        print("\n" + "-"*45)
+        print("          PRÓXIMA CONSULTA DO HISTÓRICO        ")
+        print("-"*45)
 
-    print("\nDesconectando da Matrix...")
+    # Limpa todos os tokens exibidos da tela antes de fechar por segurança
+    limpar_tela()
+    print("\nDesconectando da Matrix... Dados limpos com sucesso.")
     input("Pressione Enter para fechar o terminal...")
 
 if __name__ == "__main__":
