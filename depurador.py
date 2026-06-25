@@ -47,33 +47,36 @@ def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def main():
+    # Inicializa o estilo Matrix no terminal do Windows (Fundo Preto '0', Letras Verdes 'a')
+    if os.name == 'nt':
+        os.system('color 0a')
+        
     while True:
         limpar_tela()
-        print("\n" + "="*40)
-        print("           DEPURADOR JWT CLI            ")
-        print("="*40)
+        print("\n" + "="*45)
+        print("         SYSTEM DEPURADOR JWT - MATRIX        ")
+        print("="*45)
         
-        token = input("Cole o seu token JWT aqui e aperte Enter:\n> ")
+        token = input("Cole a sequência do token JWT e aperte Enter:\n> ")
         
         if token.strip():
             resultado = depurar_jwt(token)
             
-            print("\n" + "="*40)
-            print("       RESULTADO DA DEPURAÇÃO JWT       ")
-            print("="*40)
+            print("\n" + "="*45)
+            print("          SISTEMA DE LEITURA COMPLETO        ")
+            print("="*45)
             print(json.dumps(resultado, indent=4, ensure_ascii=False))
-            print("="*40 + "\n")
+            print("="*45 + "\n")
         else:
-            print("❌ Nenhum token inserido.")
+            print("❌ Nenhuma sequência detectada.")
 
         # Pergunta se quer continuar
-        continuar = input("\nDeseja fazer outra consulta? (S/N): ").strip().upper()
+        continuar = input("\nDeseja decodificar outra sequência? (S/N): ").strip().upper()
         if continuar != 'S':
-            break  # Sai do loop infinito
+            break  # Quebra o loop principal
 
-    # Trava final antes de fechar a janela
-    print("\nEncerrando o depurador...")
-    input("Pressione Enter para sair...")
+    print("\nDesconectando da Matrix...")
+    input("Pressione Enter para fechar o terminal...")
 
 if __name__ == "__main__":
     main()
